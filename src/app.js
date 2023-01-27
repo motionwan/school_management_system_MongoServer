@@ -43,6 +43,9 @@ const StudyMaterialRouter = require('./routes/Academics/StudyMaterials/StudyMate
 const ClassSchoolStudyMaterialRouter = require('./routes/Academics/ClassSchoolStudyMaterials/ClassSchoolStudyMaterial.router');
 const StudentAttendanceRouter = require('./routes/Academics/StudentAttendance/StudentAttendance.router');
 const SubjectRouter = require('./routes/Academics/Subjects/Subjects.router');
+const StudentRecordRouter = require('./routes/Student/StudentRecord/StudentRecord.router');
+const StaffRouter = require('./routes/Staff/Staff/Staff.router');
+const RoleRouter = require('./routes/Staff/Roles/Roles.router');
 
 //call routes
 app.use('/schools', SchoolsRouter);
@@ -55,5 +58,8 @@ app.use('/study_materials', StudyMaterialRouter);
 app.use('/class_school_study_materials', ClassSchoolStudyMaterialRouter);
 app.use('/student_attendance', StudentAttendanceRouter);
 app.use('/subject', SubjectRouter);
+app.use('/student_record', StudentRecordRouter);
+app.use('/staff', StaffRouter);
+app.use('/role', RoleRouter);
 
 module.exports = app;

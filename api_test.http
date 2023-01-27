@@ -269,3 +269,121 @@ get {{hostname}}/subject
 
 ###
 delete {{hostname}}/subject/63d9203df7998ab93630a906
+
+
+/// .......................STUDENTS RECORD API ......................///
+###
+post {{hostname}}/student_record
+Content-Type: application/json
+
+{
+"admissionNumber":"001",
+"rollNumber":"002",
+ "fullName":"Benjamin Smith",
+"gender":"male",
+"dateOfBirth":"22-05-2010",
+"phoneNumber":"555-555-5555",
+"email":"benjamin@example.com",
+"address":"Heaven way hills",
+"admissionDate":"22-05-2020",
+"bloodGroup":"O+",
+"fatherName":"John Smith",
+"motherName":"Emilia Smith",
+"fatherPhoneNumber":"555-555-454",
+"motherPhoneNumber":"555-555-454",
+"status":true,
+"fatherOccupation":"Fisherman",
+"motherOccupation":"Trader",
+"photoId":"67890",
+"sectionId":"63d9122ac759e654d1284765",
+"sessionId":"63d9122ac759e654d1284765",
+"userId":"63d9122ac759e654d1284765"
+}
+
+
+###
+put {{hostname}}/student_record/63d3ec322ca6dd2e2835fb51
+Content-Type: application/json
+
+{
+    "fullName":"Benjamin Mathematics"
+   
+
+}
+
+###
+get {{hostname}}/student_record
+
+###
+delete {{hostname}}/student_record/63d3ec322ca6dd2e2835fb51
+
+
+/// .......................STAFF RECORD API ......................///
+###
+post {{hostname}}/staff
+Content-Type: application/json
+
+{
+ "fullName":"Benjamin Smith",
+ "username":"bensmith",
+"gender":"male",
+"dateOfBirth":"22-05-2010",
+"phoneNumber":"555-555-5555",
+"email":"benjamin@example.com",
+"address":"Heaven way hills",
+"status":true,
+"photoId":"67890",
+"schoolId":"63d9122ac759e654d1284765",
+"role":"63d430f00ffc6973e14893b6"
+}
+
+
+###
+put {{hostname}}/staff/63d3ec322ca6dd2e2835fb51
+Content-Type: application/json
+
+{
+    "fullName":"Benjamin Mathematics"
+   
+
+}
+
+###
+get {{hostname}}/staff
+
+###
+delete {{hostname}}/staff/63d3ec322ca6dd2e2835fb51
+
+
+
+/// .......................Roles API ......................///
+###
+post {{hostname}}/role
+Content-Type: application/json
+
+{
+ "name": "admin",
+  "schoolId": "5f2f7a8044b0a50d66dc0f9e",
+   "permissions": [
+    { "title": "read", "path": "/read" },
+    { "title": "write", "path": "/write" },
+    { "title": "delete", "path": "/delete" }
+  ]
+}
+
+
+###
+put {{hostname}}/role/63d3ec322ca6dd2e2835fb51
+Content-Type: application/json
+
+{
+    "fullName":"Benjamin Mathematics"
+   
+
+}
+
+###
+get {{hostname}}/role
+
+###
+delete {{hostname}}/role/63d3ec322ca6dd2e2835fb51
