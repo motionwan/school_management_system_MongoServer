@@ -320,6 +320,10 @@ delete {{hostname}}/student_record/63d3ec322ca6dd2e2835fb51
 
 /// .......................STAFF RECORD API ......................///
 ###
+###
+get {{hostname}}/staff
+
+###
 post {{hostname}}/staff
 Content-Type: application/json
 
@@ -327,6 +331,7 @@ Content-Type: application/json
  "fullName":"Benjamin Smith",
  "username":"bensmith",
 "gender":"male",
+"password":"123456",
 "dateOfBirth":"22-05-2010",
 "phoneNumber":"555-555-5555",
 "email":"benjamin@example.com",
@@ -344,15 +349,28 @@ Content-Type: application/json
 
 {
     "fullName":"Benjamin Mathematics"
-   
-
 }
 
 ###
-get {{hostname}}/staff
+post {{hostname}}/staff/login
+Content-Type: application/json
+
+{
+    "login":"bensmith",
+    "password":"123456"
+}
 
 ###
-delete {{hostname}}/staff/63d3ec322ca6dd2e2835fb51
+post {{hostname}}/staff/forgot_password
+Content-Type: application/json
+
+{
+    "email":"benjamin@example.com"
+}
+
+
+###
+delete {{hostname}}/staff/63d4318526ef737ca13da605
 
 
 

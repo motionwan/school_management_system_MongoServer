@@ -17,6 +17,11 @@ const StaffSchema = new Schema({
   gender: {
     type: String,
   },
+  password: {
+    type: String,
+    required: true,
+  },
+  image: String,
   schoolId: {
     type: toId,
     ref: 'School',
@@ -27,6 +32,18 @@ const StaffSchema = new Schema({
     type: String,
     unique: true,
     required: true,
+  },
+  verified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  refreshToken: {
+    type: String,
+  },
+  resetPasswordToken: {
+    data: String,
+    default: '',
   },
   username: {
     type: String,
