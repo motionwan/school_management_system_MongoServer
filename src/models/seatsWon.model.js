@@ -6,11 +6,11 @@ const seatsWonSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  voteType: {
-    type: String,
-    // required: true,
-    lowercase: true,
-  },
+  // voteType: {
+  //   type: String,
+  //   // required: true,
+  //   lowercase: true,
+  // },
   //   constituencyVoteDetailsId: { type: toId, ref: 'ConstituencyVoteDetails' },
   //   regionalVoteDetailsId: { type: toId, ref: 'regionalVoteDetails' },
   //   nationalVoteDetailsId: { type: toId, ref: 'nationalVoteDetails' },

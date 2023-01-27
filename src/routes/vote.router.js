@@ -11,7 +11,7 @@ const {
   getRegionalVotes,
   getNationalVoteDetails,
   getVotesByElectionYear,
-  getSeatsWon,
+  getNumberOfSeatsWon,
 } = require('../controllers/vote.controller');
 
 router.post('/', createVote);
@@ -24,6 +24,6 @@ router.post('/polling_station_votes/:id', getPollingStationVotes);
 router.post('/regional_votes/:id', getRegionalVotes);
 router.post('/national_vote', getNationalVoteDetails);
 router.post('/vote_by_year', getVotesByElectionYear);
-router.get('/seats_won', getSeatsWon);
+router.get('/seats_won/:id', getNumberOfSeatsWon);
 
 module.exports = router;

@@ -286,46 +286,6 @@ const createVote = async (req, res) => {
       });
     });
     // send data to total constituency votes to find seats won
-    const uploadConstituencySeatWon = await Vote.aggregate([
-      {
-        $match: {
-          electionYearId: ObjectId(electionYearId),
-          voteType: 'parliamentary',
-        },
-      },
-      {
-        $group: {
-          _id: {
-            constituencyId: '$constituencyId',
-            partyId: '$partyId',
-            regionId: '$regionId',
-            electionYearId: '$electionYearId',
-            //voteType: '$parliamentary',
-          },
-          count: { $sum: '$count' },
-          // totalValidVotes: { $sum: '$totalValidVotes' },
-        },
-      },
-    ]);
-    //console.log(sumRegionalVote);
-
-    uploadConstituencySeatWon.map(async (totalConstituencyVote) => {
-      await SeatsWon.updateOne(
-        {
-          constituencyId: totalConstituencyVote._id.constituencyId,
-          partyId: totalConstituencyVote._id.partyId,
-          electionYearId: totalConstituencyVote._id.electionYearId,
-        },
-        {
-          count: totalConstituencyVote.count,
-          voteType: totalConstituencyVote._id.voteType,
-          regionId: totalConstituencyVote._id.regionId,
-          constituencyId: totalConstituencyVote._id.constituencyId,
-          electionYearId: totalConstituencyVote._id.electionYearId,
-        },
-        { upsert: true }
-      );
-    });
 
     return res.json(vote);
   } catch (err) {
@@ -911,22 +871,71 @@ const getVotesByElectionYear = async (req, res) => {
   }
 };
 
-const getSeatsWon = async (req, res) => {
+const getNumberOfSeatsWon = async (req, res) => {
   //const voteType = 'presidential';
+  const electionYearId = req.params.id;
   const seatsWon = await Vote.aggregate([
-    { $match: {} },
+    { $match: { electionYearId: ObjectId(electionYearId) } },
     {
       $group: {
         _id: {
           constituencyId: '$constituencyId',
           partyId: '$partyId',
+          electionYearId: '$electionYearId',
+          regionId: '$regionId',
           voteType: 'parliamentary',
         },
-        maximum: { $max: { $sum: '$count' } },
+        votes: { $sum: '$count' },
       },
     },
   ]);
-  return res.json(seatsWon);
+  let data = seatsWon;
+  let result = data.reduce((acc, curr) => {
+    const { constituencyId } = curr._id;
+    if (!acc[constituencyId]) {
+      acc[constituencyId] = {
+        constituencyId: curr._id.constituencyId,
+        partyId: curr._id.partyId,
+        electionYearId: curr._id.electionYearId,
+        regionId: curr._id.regionId,
+        votes: curr.votes,
+      };
+    } else {
+      if (curr.votes > acc[constituencyId].votes) {
+        acc[constituencyId] = {
+          constituencyId: curr._id.constituencyId,
+          partyId: curr._id.partyId,
+          electionYearId: curr._id.electionYearId,
+          regionId: curr._id.regionId,
+          votes: curr.votes,
+        };
+      }
+    }
+    return acc;
+  }, {});
+  const myResult = [result];
+  console.log(myResult);
+  myResult.map((result) => {
+    return Object.values(result).map(async (val) => {
+      console.log(val);
+      await SeatsWon.updateOne(
+        {
+          constituencyId: val.constituencyId,
+          electionYearId: val.electionYearId,
+        },
+        {
+          count: val.votes,
+          electionYearId: val.electionYearId,
+          regionId: val.regionId,
+          constituencyId: val.constituencyId,
+        },
+        { upsert: true }
+      );
+    });
+  });
+  // query the seatswons table match by election year id and group by party id and count
+
+  return res.json([result]);
 };
 
 module.exports = {
@@ -940,5 +949,5 @@ module.exports = {
   getRegionalVotes,
   getNationalVoteDetails,
   getVotesByElectionYear,
-  getSeatsWon,
+  getNumberOfSeatsWon,
 };
