@@ -1,0 +1,79 @@
+@hostname = http://localhost:3001
+
+
+/// school api ///
+get {{hostname}}/schools
+###
+
+###
+post {{hostname}}/schools
+Content-Type: application/json
+
+{
+    "label":"BMB Senior High School",
+      "phone":"876556",
+      "address":"No. 17 Guava Street Tema",
+      "email":"bmb@gmail.com",
+      "enrollmentPrefix":"BMB",
+      "admins":1,
+      "lastEnrollmentCount":0,
+      "lastInvoiceCount":0
+}
+
+###
+
+
+// class api
+get {{hostname}}/classes
+
+### 
+delete {{hostname}}/classes/id
+
+###
+put {{hostname}}/classes/id
+Content-Type: application/json
+
+{
+    "label":"Form Four"
+}
+
+###
+post {{hostname}}/classes
+Content-Type: application/json
+
+{
+    "label":"Class One"
+}
+
+###
+/// sessions api ///
+get {{hostname}}/session
+
+###
+/// class_school_material api ///
+get {{hostname}}/class_school_material
+
+
+###
+/// homework section router ////
+get {{hostname}}/homework_section
+###
+post {{hostname}}/homework_section
+Content-Type: application/json
+
+{
+    "title":"My Homework",
+    "description":"Submit by tomorrow",
+    "session:":"631142782638c3a53911a201",
+    "school:":"63111b101aa048a013171e25",
+    "section":"63111b101aa048a013171e25"
+}
+###
+delete {{hostname}}/homework_section/delete/631143482638c3a53911a209
+###
+put  {{hostname}}/homework_section/631143712638c3a53911a20d
+Content-Type: application/json
+
+{
+    "section":"63111b101aa048a013171e25"
+}
