@@ -211,3 +211,61 @@ get {{hostname}}/class_school_study_materials
 
 ###
 delete {{hostname}}/class_school_study_materials/63d90b0422d7b1250ad1dd65
+
+/// .......................STUDENTS ATTENDANCE API ......................///
+###
+post {{hostname}}/student_attendance
+Content-Type: application/json
+
+{
+    "attendanceDate":"31-01-2022",
+    "status":"p",
+    "studentRecordId":"63d4026d817e833cbd0c6ac8"
+}
+
+
+###
+put {{hostname}}/student_attendance/63d9122ac759e654d1284765
+Content-Type: application/json
+
+{
+    "status":"a"
+}
+
+###
+get {{hostname}}/student_attendance
+
+###
+delete {{hostname}}/student_attendance/63d90b0422d7b1250ad1dd65
+
+###
+
+/// .......................STUDENTS ATTENDANCE API ......................///
+###
+post {{hostname}}/subject
+Content-Type: application/json
+
+{
+    "label":"English language",
+    "code":"eng",
+    "type":"theory",
+    "classSchoolId":"63d4026d817e833cbd0c6ac8"
+}
+
+
+###
+put {{hostname}}/subject/63d9203df7998ab93630a906
+Content-Type: application/json
+
+{
+    "label":"Mathematics",
+    "code":"Math101",
+    "type":"theory"
+
+}
+
+###
+get {{hostname}}/subject
+
+###
+delete {{hostname}}/subject/63d9203df7998ab93630a906
