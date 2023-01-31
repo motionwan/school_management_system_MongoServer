@@ -21,7 +21,9 @@ const createNewClass = async (req, res) => {
     return res.json(await Classes.create({ label }));
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(401).json({ error: 'Class Already Exists' });
+      return res
+        .status(401)
+        .json({ error: 'Class With this name Already Exists' });
     } else return res.status(500).json(err.message);
   }
 };

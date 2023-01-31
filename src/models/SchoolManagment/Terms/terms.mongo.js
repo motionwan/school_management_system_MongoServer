@@ -7,6 +7,7 @@ const TermSchema = new Schema({
     type: String,
     required: true,
     default: null,
+    unique: true,
   },
   startDate: {
     type: String,

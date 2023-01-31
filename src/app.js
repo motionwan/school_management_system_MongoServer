@@ -37,11 +37,19 @@ const SchoolsRouter = require('./routes/SchoolManagement/Schools/Schools.router'
 const ClassRouter = require('./routes/SchoolManagement/Classes/classes.router');
 const ClassSchoolRouter = require('./routes/Academics/ClassSchool/ClassSchool.router');
 const TermRouter = require('./routes/SchoolManagement/Terms/Terms.router');
+const HomeworkRouter = require('./routes/Academics/Homework/Homework.router');
+const HomeworkSectionRouter = require('./routes/Academics/HomeworkSection/HomeworkSection.router');
+const StudyMaterialRouter = require('./routes/Academics/StudyMaterials/StudyMaterials.router');
+const ClassSchoolStudyMaterialRouter = require('./routes/Academics/ClassSchoolStudyMaterials/ClassSchoolStudyMaterial.router');
 
 //call routes
 app.use('/schools', SchoolsRouter);
 app.use('/classes', ClassRouter);
 app.use('/class_school', ClassSchoolRouter);
 app.use('/term', TermRouter);
+app.use('/homework', HomeworkRouter);
+app.use('/homework_section', HomeworkSectionRouter);
+app.use('/study_materials', StudyMaterialRouter);
+app.use('/class_school_study_materials', ClassSchoolStudyMaterialRouter);
 
 module.exports = app;

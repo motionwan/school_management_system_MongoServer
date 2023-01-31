@@ -42,6 +42,7 @@ const createNewSchool = async (req, res) => {
 
 const deleteSchool = async (req, res) => {
   try {
+    const { id } = req.params;
     return res.json(await Schools.findByIdAndDelete(id));
   } catch (err) {
     return res.status(500).json(err.message);
@@ -53,13 +54,15 @@ const updateSchool = async (req, res) => {
   try {
     const { id } = req.params;
     const { label, phone, address, email, status } = req.body;
-    return await Schools.findByIdAndUpdate(id, {
-      label,
-      phone,
-      address,
-      email,
-      status,
-    });
+    return res.json(
+      await Schools.findByIdAndUpdate(id, {
+        label,
+        phone,
+        address,
+        email,
+        status,
+      })
+    );
   } catch (err) {
     return res.status(500).json(err.message);
   }

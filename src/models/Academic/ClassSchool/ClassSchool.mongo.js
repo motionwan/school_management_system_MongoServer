@@ -5,8 +5,8 @@ const { format } = require('date-fns');
 
 const classSchoolSchema = new Schema({
   schoolId: { type: toId, ref: 'School' },
-  classId: { type: toId, ref: 'Class' },
-  defaultSectionId: { type: toId, ref: 'Section' },
+  classId: { type: toId, ref: 'Classes' },
+  defaultSectionId: { type: toId, ref: 'ClassSection' },
   createdAt: {
     type: String,
     default: format(Date.now(), 'do-MMM-yyyy'),

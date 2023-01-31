@@ -8,6 +8,7 @@ const classesSchema = new Schema({
     type: String,
     require: true,
     default: null,
+    unique: true,
   },
   createdAt: {
     type: String,

@@ -10,9 +10,9 @@ const createClassSchool = async (req, res) => {
     const defaultSection = await Sections.create({ label: 'A' });
     const defaultSectionId = ObjectId(defaultSection._id);
     const classSchool = await ClassSchool.create({
-      school: schoolId,
-      class: classId,
-      defaultSection: defaultSectionId,
+      schoolId: schoolId,
+      classId: classId,
+      defaultSectionId: defaultSectionId,
     });
     const classSchoolId = ObjectId(classSchool._id);
     await Sections.findByIdAndUpdate(defaultSectionId, {
@@ -20,7 +20,7 @@ const createClassSchool = async (req, res) => {
     });
     return res.json(classSchool);
   } catch (err) {
-    return res.status.json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };
 
@@ -28,9 +28,9 @@ const createClassSchool = async (req, res) => {
 const findAllClassSchool = async (req, res) => {
   try {
     const classSchools = await ClassSchool.find({})
-      .populate('school', 'label')
-      .populate('class', 'label')
-      .populate('defaultSection', 'label')
+      .populate('schoolId', 'label')
+      .populate('classId', 'label')
+      .populate('defaultSectionId', 'label')
       .exec();
     return res.json(classSchools);
   } catch (err) {
@@ -59,7 +59,7 @@ const deleteClassSchool = async (req, res) => {
 //update class school
 const updateClassSchool = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params; // class school id
     const { schoolId, classId, defaultSectionId } = req.body;
     const updatedClassSchool = await ClassSchool.findByIdAndUpdate(id, {
       schoolId,
@@ -75,11 +75,11 @@ const updateClassSchool = async (req, res) => {
 // find a class in class school
 const findClass = async (req, res) => {
   try {
-    const { id } = req.params;
-    const foundClass = await ClassSchool.find({ classId: id })
-      .populate('class', 'label')
-      .populate('school', 'label')
-      .populate('defaultSection', 'label');
+    const { id } = req.params; // class id
+    const foundClass = await ClassSchool.find({ classId: ObjectId(id) })
+      .populate('classId', 'label')
+      .populate('schoolId', 'label')
+      .populate('defaultSectionId', 'label');
     return res.json(foundClass);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -89,12 +89,12 @@ const findClass = async (req, res) => {
 // find all classes and sections for a given school
 const findAssignedClassWithSchoolId = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params; // school id
     const assignedClass = await ClassSchool.find(
       { schoolId: id },
       { schools: 0 },
       { _id: 0 }
-    ).populate('class');
+    ).populate('classId');
     return res.json(assignedClass);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -102,15 +102,15 @@ const findAssignedClassWithSchoolId = async (req, res) => {
 };
 
 // get unique classes from class school without the school or section info
-const getUniqueClass = async (id) => {
+const getUniqueClass = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params; // school id
     const uniqueClass = await ClassSchool.find({})
       .select(['classId'])
       .populate('classId')
       .where('schoolId')
       .equals(id);
-    return res;
+    return res.json(uniqueClass);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }

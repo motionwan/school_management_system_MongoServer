@@ -1,14 +1,21 @@
 const { format } = require('date-fns');
 const mongoose = require('mongoose');
+
 const toId = mongoose.Types.ObjectId;
+
 const Schema = mongoose.Schema;
 
-const homeworkSchema = new Schema({
-  title: {
+const studyMaterialSchema = new Schema({
+  label: {
+    type: String,
+    default: null,
+    unique: true,
+  },
+  description: {
     type: String,
     default: null,
   },
-  description: {
+  url: {
     type: String,
     default: null,
   },
@@ -16,11 +23,19 @@ const homeworkSchema = new Schema({
     type: String,
     default: null,
   },
-  setBy: { type: toId, ref: 'User' },
-  sessionId: { type: toId, ref: 'Session' },
-  schoolId: { type: toId, ref: 'School' },
-  subjectId: { type: toId, ref: 'Subject' },
-  homeworkSectionId: { type: toId, ref: 'HomeworkSection' },
+  classSchoolStudyMaterialId: {
+    type: toId,
+    ref: 'ClassSchoolStudyMaterial',
+  },
+  schoolId: {
+    type: toId,
+    ref: 'School',
+  },
+  addedBy: {
+    type: toId,
+    ref: 'User',
+  },
+
   createdAt: {
     type: String,
     default: format(Date.now(), 'do-MMM-yyyy'),
@@ -31,4 +46,4 @@ const homeworkSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Homework', homeworkSchema);
+module.exports = mongoose.model('StudyMaterial', studyMaterialSchema);

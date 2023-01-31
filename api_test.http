@@ -1,7 +1,7 @@
 @hostname = http://localhost:3001
 
 
-/// school api ///
+///........................... school api.................... ///
 get {{hostname}}/schools
 ###
 
@@ -22,37 +22,145 @@ Content-Type: application/json
 
 ###
 
-
-// class api
-get {{hostname}}/classes
-
-### 
-delete {{hostname}}/classes/id
-
 ###
-put {{hostname}}/classes/id
+put {{hostname}}/schools/63d3f621e530b0f1ac77c56a
 Content-Type: application/json
 
 {
-    "label":"Form Four"
+    "label":"BMB Senior High School wan",
+      "phone":"876556",
+      "address":"No. 17 Guava Street Tema",
+      "email":"bmb@gmail.com",
+      "status":true
 }
+
+###
+delete {{hostname}}/schools/63d3f621e530b0f1ac77c56a
+
+###
+// ....................CLASS API........................
+get {{hostname}}/classes
 
 ###
 post {{hostname}}/classes
 Content-Type: application/json
 
 {
-    "label":"Class One"
+    "label":"Form 1"
+}
+
+
+### 
+delete {{hostname}}/classes/63d3f8660841080ef320b42a
+
+###
+put {{hostname}}/classes/63d3f8660841080ef320b42a
+Content-Type: application/json
+
+{
+    "label":"Form Four"
+}
+
+
+///............ TERMS API.........................
+###
+post {{hostname}}/term
+Content-Type: application/json
+
+{
+    "label":"Class One",
+    "startDate":"27th December 2022",
+    "endDate":"27th December 2022"
 }
 
 ###
-/// sessions api ///
-get {{hostname}}/session
+put {{hostname}}/term/63d3fa168902bdd95379bcd9
+Content-Type: application/json
+
+{
+    "label":"New Term",
+    "startDate":"27th December 2042",
+    "endDate":"27th December 2052"
+}
 
 ###
-/// class_school_material api ///
-get {{hostname}}/class_school_material
+get {{hostname}}/term
 
+###
+
+delete {{hostname}}/term/63d3fa168902bdd95379bcd9
+
+###
+put {{hostname}}/term/63d3f9e98902bdd95379bcd7
+Content-Type: application/json
+
+{
+    "label":"First Term",
+    "startDate":"27th December 2042",
+    "endDate":"27th December 2052"
+}
+
+###
+/// ..............class School api .................///
+###
+post {{hostname}}/class_school
+Content-Type: application/json
+
+{
+    "classId":"63d3f86c0841080ef320b42c",
+    "schoolId":"63d3f780ec909c32c262c5b2"
+}
+
+###
+get {{hostname}}/class_school
+
+
+###
+get {{hostname}}/class_school/classes/63d3f86c0841080ef320b42c
+
+
+###
+get {{hostname}}/class_school/class/63d3f780ec909c32c262c5b2
+
+
+###
+get {{hostname}}/class_school/school/class/63d3f780ec909c32c262c5b2
+
+
+###
+DELETE {{hostname}}/class_school/63d4026d817e833cbd0c6ac8
+
+
+
+###
+
+/// .......................HOMEWORK API ......................///
+get {{hostname}}/homework
+
+###
+put {{hostname}}/homework
+
+
+###
+
+/// .......................HOMEWORK SECTION API ......................///
+post {{hostname}}/homework_section
+Content-Type: application/json
+
+{
+    "title":"homework 1",
+    "description":"submit your homework",
+    "setBy":"63d4026d817e833cbd0c6ac8",
+    "sessionId":"63d4026d817e833cbd0c6ac8",
+    "schoolId":"63d4026d817e833cbd0c6ac8",
+    "subjectId":"63d4026d817e833cbd0c6ac8",
+    "sectionId":"63d4026d817e833cbd0c6ac8"
+}
+###
+put {{hostname}}/homework_section
+
+
+###
 
 ###
 /// homework section router ////
@@ -69,7 +177,7 @@ Content-Type: application/json
     "section":"63111b101aa048a013171e25"
 }
 ###
-delete {{hostname}}/homework_section/delete/631143482638c3a53911a209
+delete {{hostname}}/homework_section/63d409f9d6f3ea07f0471148
 ###
 put  {{hostname}}/homework_section/631143712638c3a53911a20d
 Content-Type: application/json
@@ -77,3 +185,29 @@ Content-Type: application/json
 {
     "section":"63111b101aa048a013171e25"
 }
+
+
+###
+
+/// .......................CLASS SCHOOL STUDY MATERIALS API ......................///
+post {{hostname}}/class_school_study_materials
+Content-Type: application/json
+
+{
+    "label":"Study 1",
+    "url":"https://www.chat.openai/chat",
+    "description":"submit your homework",
+    "schoolId":"63d4026d817e833cbd0c6ac8",
+    "addedBy":"63d4026d817e833cbd0c6ac8",
+    "classSchoolId":"63d4026d817e833cbd0c6ac8",
+    "studyMaterialId":"63d4026d817e833cbd0c6ac8",
+    "subjectId":"63d4026d817e833cbd0c6ac8",
+    "sectionId":"63d4026d817e833cbd0c6ac8"
+}
+
+
+###
+get {{hostname}}/class_school_study_materials
+
+###
+delete {{hostname}}/class_school_study_materials/63d90b0422d7b1250ad1dd65
